@@ -5,7 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <Button
+            android:id="@+id/list1"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="理工要闻"
+            >
+        </Button>
+        <Button
+            android:id="@+id/list2"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="综合新闻"
+            >
+        </Button>
+        <Button
+            android:id="@+id/list3"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="院部传真"
+            >
+        </Button>
+        <Button
+            android:id="@+id/list4"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="科学教研"
+            >
+        </Button>
+    </LinearLayout>
+    <ListView
+        android:layout_marginTop="45dp"
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@color/black"
+        android:divider="#E4E4E4"
+        android:dividerHeight="1dp"
+        android:fadingEdge="horizontal"
+        android:listSelector="#00000000"
+        android:scrollbars="none">
 
-
+    </ListView>
 
 </RelativeLayout>

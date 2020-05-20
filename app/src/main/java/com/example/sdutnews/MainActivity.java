@@ -1,5 +1,6 @@
 package com.example.sdutnews;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.list2).setOnClickListener(this);
         findViewById(R.id.list3).setOnClickListener(this);
         findViewById(R.id.list4).setOnClickListener(this);
-
+        findViewById(R.id.share).setOnClickListener(this);
         try {
             showData(1);
         } catch (IOException e) {
@@ -75,9 +76,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.list4:
                 flag = 4;
                 break;
+            case R.id.share:
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "山东理工大学新闻网：https://lgwindow.sdut.edu.cn/1058/list.htm");
+                shareIntent = Intent.createChooser(shareIntent, "分享给你的朋友吧");
+                startActivity(shareIntent);
+                break;
         }
         try {
-            showData(flag);
+            if(flag != 0) showData(flag);
         } catch (IOException e) {
             e.printStackTrace();
         }

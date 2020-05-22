@@ -39,7 +39,7 @@ public class HtmlUtil {
             data.setContent(contentEle.text());
             data.setTitle(titleEle.text());
             data.setTime(timeEle.text());
-            data.setUrl(titleEle.attr("href"));
+            data.setUrl(Sdut+titleEle.attr("href"));
             list.add(data);
         }
         return list;

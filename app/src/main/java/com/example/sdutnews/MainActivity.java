@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -37,12 +38,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.list3).setOnClickListener(this);
         findViewById(R.id.list4).setOnClickListener(this);
         findViewById(R.id.share).setOnClickListener(this);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ListEleBean listEleBean = list.get(position);
+                Intent intent = new Intent(MainActivity.this,NewsActivity.class);
+                intent.putExtra("title",listEleBean.getTitle());
+                intent.putExtra("url",listEleBean.getUrl());
+                intent.putExtra("content",listEleBean.getContent());
+                startActivity(intent);
+            }
+        });
+
         try {
             showData(1);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
     public void showData(final int flag) throws IOException {
         new Thread(){
             public void run() {
@@ -80,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "山东理工大学新闻网：https://lgwindow.sdut.edu.cn/1058/list.htm");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "欢迎访问山东理工大学新闻网：\nhttps://lgwindow.sdut.edu.cn/1058/list.htm");
                 shareIntent = Intent.createChooser(shareIntent, "分享给你的朋友吧");
                 startActivity(shareIntent);
                 break;
@@ -91,5 +106,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
     }
-
 }

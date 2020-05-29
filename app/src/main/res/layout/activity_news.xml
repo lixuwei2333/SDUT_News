@@ -49,15 +49,16 @@
         android:scrollbars="vertical"
         >
     </WebView>
-    <Button
+
+
+    <ImageView
         android:id="@+id/shareNews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="61dp"
         android:layout_marginBottom="30dp"
-        android:layout_marginRight="15dp"
-        android:text="分享"
-        >
-    </Button>
+        android:src="@mipmap/fenxiang"
+        android:text="分享"></ImageView>
 </RelativeLayout>

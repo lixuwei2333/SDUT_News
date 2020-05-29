@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,21 +24,47 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.example.sdutnews.R.id.list1;
+import static com.example.sdutnews.R.id.list2;
+import static com.example.sdutnews.R.id.list3;
 import static com.example.sdutnews.R.id.list4;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private List<ListEleBean> list;
     ListView listView;
+    private RadioGroup rg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listview);
-        findViewById(R.id.list1).setOnClickListener(this);
-        findViewById(R.id.list2).setOnClickListener(this);
-        findViewById(R.id.list3).setOnClickListener(this);
-        findViewById(R.id.list4).setOnClickListener(this);
-        findViewById(R.id.share).setOnClickListener(this);
+        rg = findViewById(R.id.rg);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int flag = 0;
+                switch (checkedId) {
+                    case list1:
+                        flag = 1;
+                        break;
+                    case list2:
+                        flag = 2;
+                        break;
+                    case list3:
+                        flag = 3;
+                        break;
+                    case list4:
+                        flag = 4;
+                        break;
+                }
+                try {
+                    showData(flag);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        init();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -57,15 +84,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
     public void showData(final int flag) throws IOException {
         new Thread(){
             public void run() {
-                try {
-                    list = HtmlUtil.get_list(flag);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                list = HtmlUtil.get_list(flag);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -77,20 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }.start();
     }
     public void onClick(View v) {
-        int flag = 0;
         switch (v.getId()) {
-            case R.id.list1:
-                flag = 1;
-                break;
-            case R.id.list2:
-                flag = 2;
-                break;
-            case R.id.list3:
-                flag = 3;
-                break;
-            case R.id.list4:
-                flag = 4;
-                break;
             case R.id.share:
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
@@ -100,10 +109,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(shareIntent);
                 break;
         }
-        try {
-            if(flag != 0) showData(flag);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    }
+    public void init(){
+        new Thread(){
+            public void run() {
+                try {
+                    HtmlUtil.init(1);
+                    showData(1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+        new Thread(){
+            public void run() {
+                try {
+                    HtmlUtil.init(2);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+        new Thread(){
+            public void run() {
+                try {
+                    HtmlUtil.init(3);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+        new Thread(){
+            public void run() {
+                try {
+                    HtmlUtil.init(4);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }

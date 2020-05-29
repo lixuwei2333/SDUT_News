@@ -5,43 +5,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/rg"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
-        <Button
+        android:layout_height="45dp"
+        android:button="@null"
+        >
+
+        <RadioButton
             android:id="@+id/list1"
+            android:button="@null"
+            android:gravity="center"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/rb_background"
+            android:textColor="@drawable/rb_text_color"
             android:text="理工要闻"
+            android:checked="true"
             >
-        </Button>
-        <Button
+        </RadioButton>
+        <RadioButton
             android:id="@+id/list2"
+            android:button="@null"
+            android:gravity="center"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@drawable/rb_text_color"
+            android:background="@drawable/rb_background"
             android:text="综合新闻"
             >
-        </Button>
-        <Button
+        </RadioButton>
+        <RadioButton
             android:id="@+id/list3"
+            android:button="@null"
+            android:gravity="center"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@drawable/rb_text_color"
+            android:background="@drawable/rb_background"
+
             android:text="院部传真"
             >
-        </Button>
-        <Button
+        </RadioButton>
+        <RadioButton
             android:id="@+id/list4"
+            android:button="@null"
+            android:gravity="center"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@drawable/rb_text_color"
+            android:background="@drawable/rb_background"
+
             android:text="科学教研"
             >
-        </Button>
+        </RadioButton>
 
-    </LinearLayout>
+    </RadioGroup>
     <ListView
         android:layout_marginTop="45dp"
         android:id="@+id/listview"

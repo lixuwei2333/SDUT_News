@@ -16,6 +16,16 @@
         android:textColor="@color/black">
     </TextView>
     <TextView
+        android:id="@+id/item_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey"
+        android:text="2020-5-24"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="7dp">
+    </TextView>
+    <TextView
         android:id="@+id/item_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

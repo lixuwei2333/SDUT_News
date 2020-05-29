@@ -19,6 +19,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.litepal.LitePal;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,6 +28,7 @@ import static com.example.sdutnews.R.id.list1;
 import static com.example.sdutnews.R.id.list2;
 import static com.example.sdutnews.R.id.list3;
 import static com.example.sdutnews.R.id.list4;
+import static com.example.sdutnews.R.id.list5;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private List<ListEleBean> list;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listview);
+        findViewById(R.id.share).setOnClickListener(this);
         rg = findViewById(R.id.rg);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -55,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case list4:
                         flag = 4;
                         break;
+                    case list5:
+                        flag = 5;
+                        break;
+
                 }
                 try {
                     showData(flag);
@@ -73,18 +80,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra("title",listEleBean.getTitle());
                 intent.putExtra("url",listEleBean.getUrl());
                 intent.putExtra("content",listEleBean.getContent());
+                intent.putExtra("time",listEleBean.getTime());
                 startActivity(intent);
             }
         });
-
-        try {
-            showData(1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void showData(final int flag) throws IOException {
+        if(flag==5) {
+            list = LitePal.findAll(ListEleBean.class);
+            ListAdapter adapter = new ListAdapter(MainActivity.this,list);
+            listView.setAdapter(adapter);
+            return;
+        }
         new Thread(){
             public void run() {
                 list = HtmlUtil.get_list(flag);

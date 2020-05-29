@@ -48,13 +48,14 @@ public class ListAdapter extends BaseAdapter {
         ListEleBean listEleBean = (ListEleBean) getItem(position);
         viewHolder.Title.setText(listEleBean.getTitle());
         viewHolder.Content.setText(listEleBean.getContent());
+        viewHolder.Time.setText(listEleBean.getTime());
         return convertView;
     }
     class ViewHolder {
-        TextView Title;
-        TextView Content;
+        TextView Title,Content,Time;
         public ViewHolder(View view) {
             Title = view.findViewById(R.id.item_title);
+            Time = view.findViewById(R.id.item_time);
             Content = view.findViewById(R.id.item_content);
         }
     }

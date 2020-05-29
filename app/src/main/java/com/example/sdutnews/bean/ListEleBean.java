@@ -1,6 +1,8 @@
 package com.example.sdutnews.bean;
 
-public class ListEleBean {
+import org.litepal.crud.LitePalSupport;
+
+public class ListEleBean extends LitePalSupport {
     private String title;
     private String time;
     private String content;

@@ -5,41 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NewsActivity">
-    <!--
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="我校迎来首批返校学生"
-        android:textColor="@color/title"
-        android:textSize="20dp"
-        android:layout_centerHorizontal="true"
-        >
-    </TextView>
-    <View
-        android:id="@+id/line"
-        android:layout_height="1dp"
-        android:layout_width="fill_parent"
-        android:background="@color/grey"
-        android:layout_alignTop="@id/title"
-        android:layout_marginTop="35dp"
-        />
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/line"
-        android:layout_marginTop="10dp"
-        android:text="时间:">
-    </TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:text="作者:"
-        android:layout_alignTop="@+id/time">
-    </TextView>
-    -->
+
     <WebView
         android:id="@+id/content"
         android:layout_width="wrap_content"
@@ -50,15 +16,23 @@
         >
     </WebView>
 
-
+    <ImageView
+        android:id="@+id/starNews"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignRight="@+id/shareNews"
+        android:layout_alignBottom="@+id/shareNews"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/star_off"
+        android:text="收藏"></ImageView>
     <ImageView
         android:id="@+id/shareNews"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="61dp"
-        android:layout_marginBottom="30dp"
-        android:src="@mipmap/fenxiang"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/fenxiang"
         android:text="分享"></ImageView>
 </RelativeLayout>

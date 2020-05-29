@@ -8,90 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="tab_left">
-
-        <item name="android:textSize">20.0dip</item>
-
-        <item name="android:textColor">#ffffffff</item>
-
-        <item name="android:ellipsize">marquee</item>
-
-        <item name="android:gravity">center_horizontal</item>
-
-
-        <item name="android:paddingTop">10.0dp</item>
-
-        <item name="android:paddingBottom">10.0dp</item>
-
-        <item name="android:layout_width">fill_parent</item>
-
-        <item name="android:layout_height">fill_parent</item>
-
+    <style name="rb_button">
+        <item name="android:gravity">center</item>
         <item name="android:button">@null</item>
-
-        <item name="android:drawablePadding">2.0dip</item>
-
-        <item name="android:layout_weight">1.0</item>
-
-    </style>
-
-
-
-    <style name="tab_center">
-
-        <item name="android:textSize">20.0dip</item>
-
-        <item name="android:textColor">#ffffffff</item>
-
-        <item name="android:ellipsize">marquee</item>
-
-        <item name="android:gravity">center_horizontal</item>
-
-
-
-        <item name="android:paddingTop">10.0dp</item>
-
-        <item name="android:paddingBottom">10.0dp</item>
-
-        <item name="android:layout_width">fill_parent</item>
-
-        <item name="android:layout_height">fill_parent</item>
-
-        <item name="android:button">@null</item>
-
-        <item name="android:drawablePadding">2.0dip</item>
-
-        <item name="android:layout_weight">1.0</item>
-
-    </style>
-
-
-
-    <style name="tab_right">
-
-        <item name="android:textSize">20.0dip</item>
-
-        <item name="android:textColor">#ffffffff</item>
-
-        <item name="android:ellipsize">marquee</item>
-
-        <item name="android:gravity">center_horizontal</item>
-
-
-        <item name="android:paddingTop">10.0dp</item>
-
-        <item name="android:paddingBottom">10.0dp</item>
-
-        <item name="android:layout_width">fill_parent</item>
-
-        <item name="android:layout_height">fill_parent</item>
-
-        <item name="android:button">@null</item>
-
-        <item name="android:drawablePadding">2.0dip</item>
-
-        <item name="android:layout_weight">1.0</item>
-
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/rb_background</item>
+        <item name="android:textColor">@drawable/rb_text_color</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

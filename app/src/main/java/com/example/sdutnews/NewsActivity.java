@@ -36,7 +36,7 @@ public class NewsActivity extends AppCompatActivity {
         star = findViewById(R.id.starNews);
         final String[] imgItems = new String[1];
         intent = getIntent();
-
+        setTitle(intent.getStringExtra("title"));
         List<ListEleBean> listEleBeans = LitePal.where("Url = ?",intent.getStringExtra("url")).find(ListEleBean.class);
         if(listEleBeans.size()!=0) {
             flag = 1;
@@ -55,12 +55,15 @@ public class NewsActivity extends AppCompatActivity {
                     if (listEleBean.save()) {
                         Toast.makeText(NewsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(NewsActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NewsActivity.this, "收藏失败", Toast.LENGTH_SHORT).show();
                     }
                     star.setImageResource(R.drawable.star_on);
                 }
                 else {
                     LitePal.deleteAll(ListEleBean.class,"url = ?",intent.getStringExtra("url"));
+                    Toast.makeText(NewsActivity.this, "取消收藏", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    setResult(2,intent);
                     star.setImageResource(R.drawable.star_off);
                 }
                 flag^=1;

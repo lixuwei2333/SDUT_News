@@ -46,6 +46,14 @@
         </RadioButton>
 
     </RadioGroup>
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="    正在加载中~~~"
+        android:layout_marginTop="60dp"
+        ></TextView>
     <ListView
         android:layout_marginTop="45dp"
         android:id="@+id/listview"

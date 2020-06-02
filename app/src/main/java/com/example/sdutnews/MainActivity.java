@@ -8,7 +8,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sdutnews.adapter.ListAdapter;
@@ -33,6 +36,7 @@ import static com.example.sdutnews.R.id.list5;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private List<ListEleBean> list;
     ListView listView;
+    TextView textView;
     private RadioGroup rg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listView = findViewById(R.id.listview);
         findViewById(R.id.share).setOnClickListener(this);
         rg = findViewById(R.id.rg);
+        textView = findViewById(R.id.hint);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -81,12 +86,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra("url",listEleBean.getUrl());
                 intent.putExtra("content",listEleBean.getContent());
                 intent.putExtra("time",listEleBean.getTime());
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
     }
 
-    public void showData(final int flag) throws IOException {
+    public void showData(final int flag) throws IOException {   //展示新闻列表
         if(flag==5) {
             list = LitePal.findAll(ListEleBean.class);
             ListAdapter adapter = new ListAdapter(MainActivity.this,list);
@@ -99,14 +104,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        textView.setText("");
                         ListAdapter adapter = new ListAdapter(MainActivity.this,list);
                         listView.setAdapter(adapter);
+
                     }
                 });
             }
         }.start();
     }
-    public void onClick(View v) {
+    public void onClick(View v) {           //分享操作
         switch (v.getId()) {
             case R.id.share:
                 Intent shareIntent = new Intent();
@@ -118,43 +125,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-    public void init(){
-        new Thread(){
-            public void run() {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1&&resultCode == 2) {
+           if(rg.getCheckedRadioButtonId()== list5) {
                 try {
-                    HtmlUtil.init(1);
-                    showData(1);
+                    showData(5);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-        }.start();
-        new Thread(){
-            public void run() {
-                try {
-                    HtmlUtil.init(2);
-                } catch (IOException e) {
-                    e.printStackTrace();
+        }
+    }
+    public void init(){         //并行加载4列表新闻
+        for(int i = 1; i <= 4; i++) {
+            final int finalI = i;
+            new Thread() {
+                public void run() {
+                    try {
+                        HtmlUtil.init(finalI);
+                        if(finalI==1) showData(finalI);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }.start();
-        new Thread(){
-            public void run() {
-                try {
-                    HtmlUtil.init(3);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-        new Thread(){
-            public void run() {
-                try {
-                    HtmlUtil.init(4);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+            }.start();
+        }
     }
 }
